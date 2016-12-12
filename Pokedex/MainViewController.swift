@@ -7,20 +7,33 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MainViewController: UIViewController {
     @IBOutlet weak var collection: UICollectionView!
     var pokemons = [Pokemon]()
+    var musicPlayer: AVAudioPlayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collection.delegate = self
         collection.dataSource = self
         parsePokemonCSV()
+        initAudio()
         
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    func initAudio(){
+        let path = Bundle.main.path(forResource: "music", ofType: "mp3")
+        do {
+           musicPlayer = try AVAudioPlayer(contentsOf: URL(string: path!)!)
+        } catch let _error as NSError {
+            print(_error.debugDescription)
+        }
+    }
+    
     func parsePokemonCSV() {
         let path = Bundle.main.path(forResource: "pokemon", ofType: "csv")!
         do {
@@ -32,15 +45,21 @@ class MainViewController: UIViewController {
                 let name = row["identifier"]!
                 let poke = Pokemon(name: name, pokedexID: pokeID)
                 pokemons.append(poke)
-                
-                
             }
-            
         }catch let _error as NSError{
             print(_error.debugDescription)
         }
     }
-    
+    @IBAction func onMusicButton(_ sender:UIButton) {
+        if musicPlayer.isPlaying {
+            musicPlayer.pause()
+            sender.alpha = 0.2
+        }else {
+            musicPlayer.play()
+            sender.alpha = 1.0
+
+        }
+    }
 }
 
 
@@ -58,7 +77,7 @@ private typealias CollectionDelegateFlowLayout = MainViewController
 extension CollectionDelegateFlowLayout: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 90, height: 90)
     }
     
 }
@@ -70,7 +89,7 @@ extension CollectionDataSource: UICollectionViewDataSource {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"PokeCell", for: indexPath) as? PokeCell {
 //            let pokemon = Pokemon(name: "pokemon", pokedexID: indexPath.row)
             let poke = pokemons[indexPath.row]
-            cell.configureCell(pokemon: poke)
+            cell.configureCell(poke)
             
             return cell
         }else {

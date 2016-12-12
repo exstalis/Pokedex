@@ -6,9 +6,15 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="pokemon.ttf">
+            <string>PokemonSolidNormal</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main View Controller-->
         <scene sceneID="bzJ-c7-kBP">
@@ -24,9 +30,32 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RPY-xk-Ojh">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PokeDex" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyI-QP-FK2">
+                                        <rect key="frame" x="148" y="19" width="79" height="28"/>
+                                        <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bN-hH-ibl">
+                                        <rect key="frame" x="337" y="27" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="9uS-RP-PKV"/>
+                                            <constraint firstAttribute="width" secondItem="9bN-hH-ibl" secondAttribute="height" multiplier="1:1" id="I1o-jH-HFr"/>
+                                        </constraints>
+                                        <state key="normal" image="music.png"/>
+                                        <connections>
+                                            <action selector="onMusicButton:" destination="PzA-BJ-aLN" eventType="touchUpInside" id="jW3-3A-BxB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.75294117650000003" green="0.31372549020000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="zyI-QP-FK2" firstAttribute="centerY" secondItem="RPY-xk-Ojh" secondAttribute="centerY" id="3At-42-CIx"/>
                                     <constraint firstAttribute="height" constant="65" id="BKH-bO-XT8"/>
+                                    <constraint firstAttribute="trailing" secondItem="9bN-hH-ibl" secondAttribute="trailing" constant="8" id="Hc9-BT-5Jk"/>
+                                    <constraint firstItem="zyI-QP-FK2" firstAttribute="centerX" secondItem="RPY-xk-Ojh" secondAttribute="centerX" id="RNQ-CG-LqR"/>
+                                    <constraint firstItem="9bN-hH-ibl" firstAttribute="top" secondItem="RPY-xk-Ojh" secondAttribute="top" constant="27" id="thp-IL-ynI"/>
                                 </constraints>
                             </view>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="U7b-Ul-jG6">
@@ -62,7 +91,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxe-LZ-Tao">
-                                                    <rect key="frame" x="0.0" y="79.5" width="100" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="79" width="100" height="21"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                     <color key="textColor" red="0.75294117650000003" green="0.31372549020000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -137,5 +166,6 @@
     <resources>
         <image name="400" width="120" height="120"/>
         <image name="bg" width="1920" height="1200"/>
+        <image name="music.png" width="100" height="100"/>
     </resources>
 </document>

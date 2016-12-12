@@ -9,9 +9,10 @@
 import UIKit
 
 class PokeCell: UICollectionViewCell {
+    
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    var pokemon: Pokemon?
+    var pokemon: Pokemon!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -19,10 +20,10 @@ class PokeCell: UICollectionViewCell {
         
     }
     
-    func configureCell(pokemon: Pokemon) {
-        self.pokemon = pokemon
-        nameLabel.text = self.pokemon?.name.capitalized
-        thumbnailImageView.image = UIImage(named: "\(self.pokemon?.pokedexID)")
+    func configureCell(_ pokemon: Pokemon) {
+        self.pokemon = pokemon 
+        nameLabel.text = self.pokemon.name.capitalized
+        thumbnailImageView.image = UIImage(named: "\(self.pokemon.pokedexID)")
         
     }
     
