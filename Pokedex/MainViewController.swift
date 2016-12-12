@@ -11,13 +11,18 @@ import AVFoundation
 
 class MainViewController: UIViewController {
     @IBOutlet weak var collection: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var pokemons = [Pokemon]()
     var musicPlayer: AVAudioPlayer!
+    var filteredPokemons = [Pokemon]()
+    var inSearchMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collection.delegate = self
         collection.dataSource = self
+        searchBar.delegate = self
         parsePokemonCSV()
         initAudio()
         
@@ -88,9 +93,17 @@ extension CollectionDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"PokeCell", for: indexPath) as? PokeCell {
 //            let pokemon = Pokemon(name: "pokemon", pokedexID: indexPath.row)
-            let poke = pokemons[indexPath.row]
-            cell.configureCell(poke)
-            
+//            let poke = pokemons[indexPath.row]
+            let poke: Pokemon!
+            if inSearchMode {
+                poke = filteredPokemons[indexPath.row]
+                cell.configureCell(poke)
+
+            }else {
+                poke = pokemons[indexPath.row]
+                cell.configureCell(poke)
+
+            }
             return cell
         }else {
             return UICollectionViewCell()
@@ -100,6 +113,30 @@ extension CollectionDataSource: UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+        if inSearchMode {
+            return filteredPokemons.count
+
+        }
         return pokemons.count
+    }
+}
+
+private typealias SearchBarDelegate = MainViewController
+extension SearchBarDelegate: UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            inSearchMode = false
+            view.endEditing(true)
+            collection.reloadData()
+
+        }else{
+            inSearchMode = true
+            let lower = searchBar.text!.lowercased()
+            filteredPokemons = pokemons.filter({$0.name.range(of: lower) != nil} )
+            collection.reloadData()
+
+        }
+
     }
 }

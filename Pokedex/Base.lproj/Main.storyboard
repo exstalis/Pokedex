@@ -58,7 +58,7 @@
                                     <constraint firstItem="9bN-hH-ibl" firstAttribute="top" secondItem="RPY-xk-Ojh" secondAttribute="top" constant="27" id="thp-IL-ynI"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="U7b-Ul-jG6">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search Pokemon" translatesAutoresizingMaskIntoConstraints="NO" id="U7b-Ul-jG6">
                                 <rect key="frame" x="0.0" y="65" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="wBh-fX-UXt"/>
@@ -87,7 +87,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="400" translatesAutoresizingMaskIntoConstraints="NO" id="fwL-Fd-yOV">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="79"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxe-LZ-Tao">
@@ -139,6 +139,7 @@
                     </view>
                     <connections>
                         <outlet property="collection" destination="us1-mn-ItZ" id="H7K-NN-LdK"/>
+                        <outlet property="searchBar" destination="U7b-Ul-jG6" id="kVQ-fS-7Tp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OTb-Up-HpI" userLabel="First Responder" sceneMemberID="firstResponder"/>
