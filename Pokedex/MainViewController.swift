@@ -23,6 +23,7 @@ class MainViewController: UIViewController {
         collection.delegate = self
         collection.dataSource = self
         searchBar.delegate = self
+        searchBar.returnKeyType = .done
         parsePokemonCSV()
         initAudio()
         
@@ -65,6 +66,19 @@ class MainViewController: UIViewController {
 
         }
     }
+   //  MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PokemonDetailViewController" {
+            if let detail = segue.destination as? PokemonDetailViewController {
+                if let poke = sender as? Pokemon {
+                    detail.poke = poke
+                }
+            }
+            
+        }
+    }
 }
 
 
@@ -73,7 +87,13 @@ class MainViewController: UIViewController {
 private typealias CollectionDelegate = MainViewController
 extension CollectionDelegate: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        var poke: Pokemon!
+        if inSearchMode {
+            poke = filteredPokemons[indexPath.row]
+        } else {
+            poke = pokemons[indexPath.row]
+        }
+        performSegue(withIdentifier: "goToDetail", sender: poke)
     }
 }
 
@@ -138,5 +158,8 @@ extension SearchBarDelegate: UISearchBarDelegate{
 
         }
 
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
     }
 }
