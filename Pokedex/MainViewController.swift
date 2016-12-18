@@ -70,7 +70,7 @@ class MainViewController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PokemonDetailViewController" {
+        if segue.identifier == "goToDetail" {
             if let detail = segue.destination as? PokemonDetailViewController {
                 if let poke = sender as? Pokemon {
                     detail.poke = poke
